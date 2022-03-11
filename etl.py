@@ -7,6 +7,8 @@ from datetime import datetime
 
 
 def process_song_file(cur, filepath):
+    ''' Function that join songs JSON files and insert into database 
+    at songs, artists tables'''
     # open song file
     df=pd.read_json(filepath,lines=True)
 
@@ -21,6 +23,15 @@ def process_song_file(cur, filepath):
     cur.execute(artist_table_insert, artist_data)
     
 def get_time_columns(dataframe):
+     ''' Function that transform timestamp column from miliseconds into  
+     hour, day, week, year, month and weekday
+     
+     input: 
+        dataframe - pandas dataframe containing timestamp column in miliseconds called 'ts'
+     output:
+        time - New dataframe containg only  timestamp ,hour, day, week, year, month and weekday columns
+     
+     '''
     time = pd.DataFrame()
     time['start_time'] = dataframe['ts_tstamp'].copy()
     time['hour'] = dataframe['ts'].dt.hour
@@ -33,6 +44,8 @@ def get_time_columns(dataframe):
 
 
 def process_log_file(cur, filepath):
+    ''' Function that joins logs JSON files and insert into database 
+    at users, time and songplays tables'''
     # open log file
     df = pd.read_json(filepath,lines=True)
     
@@ -43,11 +56,6 @@ def process_log_file(cur, filepath):
     df['ts_tstamp'] = df['ts'].copy()
     df['ts'] = pd.to_datetime(df['ts'], unit='ms')
     time_df = get_time_columns(df).copy()
-    
-    # insert time data records
-    #time_data = 
-    #column_labels = 
-    #time_df = 
 
     for i, row in time_df.iterrows():
         cur.execute(time_table_insert, list(row))
@@ -83,6 +91,7 @@ def process_log_file(cur, filepath):
 
 
 def process_data(cur, conn, filepath, func):
+    ''' Function that all ger all JSON paths and execute process function inserting on DB '''
     # get all files matching extension from directory
     all_files = []
     for root, dirs, files in os.walk(filepath):
