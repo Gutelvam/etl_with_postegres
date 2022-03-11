@@ -91,7 +91,7 @@ def process_log_file(cur, filepath):
 
 
 def process_data(cur, conn, filepath, func):
-    ''' Function that all ger all JSON paths and execute process function inserting on DB '''
+    ''' Function that get all JSON paths and execute process function inserting on DB '''
     # get all files matching extension from directory
     all_files = []
     for root, dirs, files in os.walk(filepath):
