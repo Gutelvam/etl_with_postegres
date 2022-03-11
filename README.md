@@ -84,9 +84,9 @@ Using the song and log datasets, you'll need to create a star schema optimized f
 
 ## How to  use  <a name="usage"></a>
 #### Requirements  <a name="req"></a>
-- numpy==1.16.2
-- psycopg2==2.7.6.1
-- pandas==0.24.2
+        - numpy==1.16.2
+        - psycopg2==2.7.6.1
+        - pandas==0.24.2
 #### Execution  <a name="exec"></a>
 
 For this step first you must to clone all repository and execute in that order, utilizing pyhthon in cmd `python create_tables.py` , `python etl.py`
