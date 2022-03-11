@@ -23,15 +23,15 @@ def process_song_file(cur, filepath):
     cur.execute(artist_table_insert, artist_data)
     
 def get_time_columns(dataframe):
-     ''' Function that transform timestamp column from miliseconds into  
+    """
+     Function that transform timestamp column from miliseconds into  
      hour, day, week, year, month and weekday
      
      input: 
         dataframe - pandas dataframe containing timestamp column in miliseconds called 'ts'
      output:
         time - New dataframe containg only  timestamp ,hour, day, week, year, month and weekday columns
-     
-     '''
+    """
     time = pd.DataFrame()
     time['start_time'] = dataframe['ts_tstamp'].copy()
     time['hour'] = dataframe['ts'].dt.hour
